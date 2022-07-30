@@ -1,0 +1,38 @@
+body {
+  background-color: beige;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.task {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.summary {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+
+  gap: 1vw;
+}
+
+.hide {
+  display: none;
+}
+
+.completed {
+  background-color: grey;
+}
+
+.button-selected {
+  color: blue;
+}

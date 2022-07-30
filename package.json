@@ -1,0 +1,16 @@
+{
+  "name": "ToDo-snp-internship",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/matwej29/ToDo-snp-internship.git",
+  "author": "matwej29 <51135127+matwej29@users.noreply.github.com>",
+  "license": "MIT",
+  "private": true,
+  "devDependencies": {
+    "parcel": "^2.6.2"
+  },
+  "scripts": {
+    "start": "parcel ./index.html",
+    "build": "parcel build ./index.html --dist-dir build"
+  }
+}
