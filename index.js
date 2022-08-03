@@ -14,7 +14,8 @@ const addItem = (text) => {
   div.className = "task";
   div.id = item.id;
   div.dataset.state = item.state;
-  // div.innerHTML = `
+  div.dataset.clicked = false;
+  // div.innerHTML = `f
   // <input type="checkbox" onclick="changeState(${id}, this.value)"/>
   // <p>${text}</p>
   // <button onclick="deleteItem(${id})">X</button>`;
@@ -27,6 +28,23 @@ const addItem = (text) => {
 
   const content = document.createElement("p");
   content.textContent = item.text;
+  content.classList = "task-content";
+
+  div.ondblclick = () => {
+    div.classList.add("editing");
+    content.contentEditable = true;
+
+    content.addEventListener("keydown", (event) => {
+      if (event.code == "Escape" || event.code == "Enter") {
+        content.contentEditable = false;
+        div.classList.remove("editing");
+        const ind = list.findIndex((item) => item.id == div.id);
+        const newValue = document.querySelector(`div[id="${div.id}"] p`);
+
+        list[ind].text = newValue;
+      }
+    });
+  };
 
   const deleteButton = document.createElement("button");
   deleteButton.textContent = "X";
@@ -53,7 +71,6 @@ const changeState = (id) => {
   const ind = list.findIndex((item) => item.id == id);
 
   const div = document.getElementById(id);
-  console.log(div, ind, list);
   if (list[ind].state === 0) {
     div.classList.add("completed");
     div.dataset.state = 1;
@@ -103,7 +120,7 @@ const clearCompleted = () => {
     list.splice(ind);
   });
 
-  console.log(list, idToDelete)
+  console.log(list, idToDelete);
   update();
 };
 

@@ -1,5 +1,5 @@
 body {
-  background-color: beige;
+  background-color: #F8F7F9;
 }
 
 .main {
@@ -11,9 +11,22 @@ body {
 
 .task {
   display: flex;
+  padding: 0 2vw 0 2vw;
   flex-direction: row;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: center;
+  background-color: #92DCE5;
+  border-radius: 20px;
+  min-height: 4vw;
+}
+
+.task-content {
+  flex: 1;
+  margin: 0;
+}
+
+.editing {
+  background-color: #C18C5D;
 }
 
 .summary {
@@ -30,9 +43,14 @@ body {
 }
 
 .completed {
-  background-color: grey;
+  background-color: #3C3744;
 }
 
 .button-selected {
-  color: blue;
+  color: #CE796B;
+}
+
+a {
+  appearance: none;
+  text-decoration: none;
 }
