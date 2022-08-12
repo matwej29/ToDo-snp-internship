@@ -12,8 +12,8 @@
       <h1>ToDo</h1>
       <div class="todo">
         <div class="input-field">
-          <button onclick="makeComplete()">makeComplete</button>
-          <input type="text" onchange="addItem(this.value); this.value = ''" autofocus/>
+          <button onclick="toggleCompleteButton()">toggleComplete</button>
+          <input type="text" class="new-todo" onchange="addItem(this.value); this.value = ''" autofocus/>
         </div>
         <div class="todos">
           <!-- <div class="task" id="">
