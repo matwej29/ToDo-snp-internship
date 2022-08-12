@@ -1,5 +1,13 @@
+:root {
+  --dark: #835134;
+  --light: #EDDCD2;
+  --white: #FFF1E6;
+  --accent1: #DDBEA9;
+  --accent2: #A5A58D;
+}
+
 body {
-  background-color: #F8F7F9;
+  background-color: white;
 }
 
 .main {
@@ -9,15 +17,44 @@ body {
   justify-content: center;
 }
 
+.input-field {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+.new-todo {
+  height: 30px;
+  flex: 1;
+  border-radius: 10px;
+  border: 1px solid black;
+}
+
+.todo {
+  display: flex;
+  flex-direction: column;
+  width: 30vw;
+
+  gap: 10px;
+}
+
+.todos {
+  display: flex;
+  flex-direction: column;
+
+  gap: 10px;
+}
+
 .task {
   display: flex;
   padding: 0 2vw 0 2vw;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  background-color: #92DCE5;
+  background-color: var(--light);
   border-radius: 20px;
-  min-height: 4vw;
+  min-height: 60px;
 }
 
 .task-content {
@@ -26,7 +63,7 @@ body {
 }
 
 .editing {
-  background-color: #C18C5D;
+  background-color: var(--accent2);
 }
 
 .summary {
@@ -34,6 +71,7 @@ body {
   flex-direction: row;
   justify-content: space-between;
   align-items: baseline;
+  flex-wrap: wrap;
 
   gap: 1vw;
 }
@@ -43,14 +81,25 @@ body {
 }
 
 .completed {
-  background-color: #3C3744;
+  background-color: var(--dark);
 }
 
 .button-selected {
-  color: #CE796B;
+  color: #ce796b;
 }
 
 a {
   appearance: none;
   text-decoration: none;
+  color: gray;
+}
+
+p {
+  margin: 0;
+}
+
+.filter a {
+  border: 1px solid gray;
+  border-radius: 3px;
+  padding: 3px 7px;
 }
