@@ -1,12 +1,11 @@
 const list = [];
 list.activeElements = 0;
+let activeFilter = "all";
 
 let next_id = 0;
 
-// const item = { state: 0, text: "", id: 0 };
-
 const addItem = (text) => {
-  const item = { state: 0, text: text, id: next_id++ };
+  const item = { state: "active", text: text, id: next_id++ };
   list.activeElements += 1;
   list.push(item);
 
@@ -15,15 +14,11 @@ const addItem = (text) => {
   div.id = item.id;
   div.dataset.state = item.state;
   div.dataset.clicked = false;
-  // div.innerHTML = `
-  // <input type="checkbox" onclick="changeState(${id}, this.value)"/>
-  // <p>${text}</p>
-  // <button onclick="deleteItem(${id})">X</button>`;
 
   const checkbox = document.createElement("input");
   checkbox.type = "checkbox";
   checkbox.onclick = () => {
-    changeState(div.id);
+    div.toggleComplete();
   };
 
   const content = document.createElement("p");
@@ -56,7 +51,7 @@ const addItem = (text) => {
 
       const ind = list.findIndex((item) => item.id == div.id);
       content.textContent = edit_input.value;
-      list[ind].text = edit_input.value; //newValue;
+      list[ind].text = edit_input.value;
       edit_input.remove();
     };
     content.after(edit_input);
@@ -69,31 +64,21 @@ const addItem = (text) => {
 
   div.toggleComplete = () => {
     const curr_item_ind = list.findIndex((elem) => elem.id == div.id);
-    console.log(list[curr_item_ind]);
-    if (list[curr_item_ind].state == 0) {
+    if (list[curr_item_ind].state == "active") {
       div.classList.add("completed");
       checkbox.checked = true;
-      list[curr_item_ind].state = 1;
-      div.dataset.state = 1;
+      list[curr_item_ind].state = div.dataset.state = "completed";
       list.activeElements -= 1;
     } else {
       div.classList.remove("completed");
       checkbox.checked = false;
-      list[curr_item_ind].state = 0;
-      div.dataset.state = 0;
+      list[curr_item_ind].state = div.dataset.state = "active";
       list.activeElements += 1;
     }
+    if (div.dataset.state != activeFilter && activeFilter != "all") {
+      div.classList.add("hide");
+    }
   };
-};
-
-const changeState = (id) => {
-  const ind = list.findIndex((item) => item.id == id);
-
-  const div = document.getElementById(id);
-  console.log(list[ind].state);
-  div.toggleComplete();
-
-  update();
 };
 
 // может это как-то покрасивее сделать
@@ -123,7 +108,6 @@ const toggleCompleteButton = () => {
     div.toggleComplete(target_val);
   });
   target_val = target_val == 1 ? 0 : 1;
-  console.log(target_val);
 
   update();
 };
@@ -142,19 +126,18 @@ const clearCompleted = () => {
     list.splice(ind);
   });
 
-  console.log(list, idToDelete);
   update();
 };
 
 const clearFilterButtonsSelection = () => {
   const buttons = document.getElementsByClassName("filter")[0].children;
-  console.log();
   for (item of buttons) {
     item.classList.remove("button-selected");
   }
 };
 
 const showAll = () => {
+  activeFilter = "all";
   clearFilterButtonsSelection();
   document.getElementById("button-all").classList.add("button-selected");
 
@@ -165,23 +148,25 @@ const showAll = () => {
 };
 
 const showActive = () => {
+  activeFilter = "active";
   clearFilterButtonsSelection();
   document.getElementById("button-active").classList.add("button-selected");
 
   const tasks = document.getElementsByClassName("task");
   for (item of tasks) {
-    if (item.dataset.state == 0) item.classList.remove("hide");
+    if (item.dataset.state == "active") item.classList.remove("hide");
     else item.classList.add("hide");
   }
 };
 
 const showCompleted = () => {
+  activeFilter = "completed";
   clearFilterButtonsSelection();
   document.getElementById("button-completed").classList.add("button-selected");
 
   const tasks = document.getElementsByClassName("task");
   for (item of tasks) {
-    if (item.dataset.state == 1) item.classList.remove("hide");
+    if (item.dataset.state == "completed") item.classList.remove("hide");
     else item.classList.add("hide");
   }
 };
