@@ -24,11 +24,25 @@ body {
   gap: 10px;
 }
 
+.complete-button {
+  height: 30px;
+  border: none;
+  background-color: var(--accent2);
+}
+
+.complete-button-active{
+  background-color: var(--dark);
+}
+
 .new-todo {
   height: 30px;
   flex: 1;
-  border-radius: 10px;
+  /* border-radius: 10px; */
   border: 1px solid black;
+}
+
+.new-todo:focus {
+  border: 2px solid black;
 }
 
 .todo {
@@ -53,7 +67,7 @@ body {
   justify-content: space-between;
   align-items: center;
   background-color: var(--light);
-  border-radius: 20px;
+  /* border-radius: 20px; */
   min-height: 60px;
 }
 
