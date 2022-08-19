@@ -33,12 +33,14 @@ const addItem = (text) => {
   const deleteButton = document.createElement("button");
   deleteButton.textContent = "X";
   deleteButton.onclick = () => {
-    deleteItem(div.id);
+    const ind = list.findIndex((item) => item.id == div.id);
+    list.splice(ind);
+    div.remove();
   };
 
   content.ondblclick = () => {
     const edit_input = document.createElement("input");
-    edit_input.type = 'text'
+    edit_input.type = "text";
     edit_input.value = content.textContent;
 
     div.classList.add("editing");
@@ -72,23 +74,16 @@ const addItem = (text) => {
       div.classList.add("completed");
       checkbox.checked = true;
       list[curr_item_ind].state = 1;
+      div.dataset.state = 1;
       list.activeElements -= 1;
     } else {
       div.classList.remove("completed");
       checkbox.checked = false;
       list[curr_item_ind].state = 0;
+      div.dataset.state = 0;
       list.activeElements += 1;
     }
   };
-};
-
-const deleteItem = (id) => {
-  const ind = list.findIndex((item) => item.id == id);
-  list.splice(ind);
-
-  document.getElementById(id).remove();
-
-  update();
 };
 
 const changeState = (id) => {
