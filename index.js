@@ -27,7 +27,6 @@ const addItem = (text) => {
   content.classList = "task-content";
 
   const deleteButton = document.createElement("button");
-  deleteButton.textContent = "X";
   deleteButton.className = "delete-button";
   deleteButton.onclick = () => {
     const ind = list.findIndex((item) => item.id == div.id);
@@ -164,9 +163,9 @@ const clearCompleted = () => {
 
   idToDelete.forEach((id) => {
     const ind = list.findIndex((item) => item.id == id);
-    list.splice(ind);
+    list.splice(ind, 1);
   });
-
+  
   update();
 };
 
