@@ -1,13 +1,17 @@
 :root {
   --dark: #835134;
-  --light: #EDDCD2;
-  --white: #FFF1E6;
-  --accent1: #DDBEA9;
-  --accent2: #A5A58D;
+  --light: #eddcd2;
+  --white: #fff1e6;
+  --accent1: #ddbea9;
+  --accent2: #a5a58d;
 }
 
 body {
   background-color: white;
+  width: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .main {
@@ -15,6 +19,8 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  /* min-width: 230px; */
+  max-width: 550px;
 }
 
 .input-field {
@@ -22,6 +28,7 @@ body {
   flex-direction: row;
   align-items: center;
   gap: 10px;
+  flex-wrap: wrap;
 }
 
 .complete-button {
@@ -30,7 +37,7 @@ body {
   background-color: var(--accent2);
 }
 
-.complete-button-active{
+.complete-button-active {
   background-color: var(--dark);
 }
 
@@ -48,9 +55,13 @@ body {
 .todo {
   display: flex;
   flex-direction: column;
-  width: 30vw;
-
+  /* width: 30vw; */
+  min-width: 500px;
   gap: 10px;
+}
+
+.todo p {
+  word-wrap: break-all;
 }
 
 .todos {
@@ -74,6 +85,11 @@ body {
 .task-content {
   flex: 1;
   margin: 0;
+}
+
+.delete-button {
+  border: none;
+  background-color: transparent;
 }
 
 .editing {
@@ -112,8 +128,21 @@ p {
   margin: 0;
 }
 
+.filter {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
 .filter a {
   border: 1px solid gray;
   border-radius: 3px;
   padding: 3px 7px;
+}
+
+h1 {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  color: gray;
 }
