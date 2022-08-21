@@ -98,16 +98,6 @@ const update = () => {
   updateClearCompletedVisability();
 };
 
-const updateClearCompletedVisability = () => {
-  if (list.length != list.activeElements) {
-    document
-      .getElementsByClassName("clear-completed")[0]
-      .classList.remove("hide");
-  } else {
-    document.getElementsByClassName("clear-completed")[0].classList.add("hide");
-  }
-};
-
 const updateCounter = () => {
   document.getElementById(
     "itemsLeft"
@@ -119,6 +109,31 @@ const updateSummaryVisability = () => {
     document.getElementsByClassName("summary")[0].classList.add("hide");
   } else {
     document.getElementsByClassName("summary")[0].classList.remove("hide");
+  }
+};
+
+const updateToggleCompleteButtonState = () => {
+  const button = document.getElementsByClassName("complete-button")[0];
+  if (list.activeElements == 0) {
+    button.classList.add("complete-button-active");
+  } else {
+    button.classList.remove("complete-button-active");
+  }
+
+  if (list.length == 0) {
+    button.classList.add("hide");
+  } else {
+    button.classList.remove("hide");
+  }
+};
+
+const updateClearCompletedVisability = () => {
+  if (list.length != list.activeElements) {
+    document
+      .getElementsByClassName("clear-completed")[0]
+      .classList.remove("hide");
+  } else {
+    document.getElementsByClassName("clear-completed")[0].classList.add("hide");
   }
 };
 
@@ -135,21 +150,6 @@ const toggleCompleteButton = (button) => {
   });
 
   update();
-};
-
-const updateToggleCompleteButtonState = () => {
-  const button = document.getElementsByClassName("complete-button")[0];
-  if (list.activeElements == 0) {
-    button.classList.add("complete-button-active");
-  } else {
-    button.classList.remove("complete-button-active");
-  }
-
-  if (list.length == 0) {
-    button.classList.add("hide");
-  } else {
-    button.classList.remove("hide");
-  }
 };
 
 const clearCompleted = () => {
