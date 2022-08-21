@@ -9,18 +9,14 @@
   </head>
   <body>
     <div class="main">
-      <h1>ToDo</h1>
+      <h1>todos</h1>
       <div class="todo">
         <div class="input-field">
-          <button onclick="toggleCompleteButton()" class="complete-button">toggleComplete</button>
+          <button onclick="toggleCompleteButton(this)" class="complete-button hide">toggleComplete</button>
           <input type="text" class="new-todo" onchange="addItem(this.value); this.value = ''" autofocus/>
         </div>
         <div class="todos">
-          <!-- <div class="task" id="">
-            <input type="radio"/>
-            <p>Todo1</p>
-            <button onclick="deleteItem()">X</button>
-          </div> -->
+          <!-- todo -->
         </div>
         <div class="summary hide">
           <p id="itemsLeft">n left</p>
@@ -29,7 +25,7 @@
             <a href="#" onclick="showActive()" id="button-active">Active</a>
             <a href="#" onclick="showCompleted()" id="button-completed">Completed</a>
           </div>
-          <a href="#" onclick="clearCompleted()">clear completed</a>
+          <a href="#" onclick="clearCompleted()" class="clear-completed">clear completed</a>
         </div>
       </div>
     </div>

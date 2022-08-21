@@ -5,6 +5,7 @@ let activeFilter = "all";
 let next_id = 0;
 
 const addItem = (text) => {
+  // state: "active", "completed"
   const item = { state: "active", text: text, id: next_id++ };
   list.activeElements += 1;
   list.push(item);
@@ -27,10 +28,12 @@ const addItem = (text) => {
 
   const deleteButton = document.createElement("button");
   deleteButton.textContent = "X";
+  deleteButton.className = "delete-button";
   deleteButton.onclick = () => {
     const ind = list.findIndex((item) => item.id == div.id);
     list.splice(ind);
     div.remove();
+    update();
   };
 
   content.ondblclick = () => {
@@ -43,6 +46,7 @@ const addItem = (text) => {
     checkbox.classList.add("hide");
     content.classList.add("hide");
 
+    content.after(edit_input);
     edit_input.onblur = edit_input.onchange = () => {
       div.classList.remove("editing");
       deleteButton.classList.remove("hide");
@@ -54,7 +58,6 @@ const addItem = (text) => {
       list[ind].text = edit_input.value;
       edit_input.remove();
     };
-    content.after(edit_input);
     edit_input.focus();
   };
 
@@ -62,14 +65,20 @@ const addItem = (text) => {
   document.getElementsByClassName("todos")[0].append(div);
   update();
 
-  div.toggleComplete = () => {
+  div.toggleComplete = (target_val) => {
     const curr_item_ind = list.findIndex((elem) => elem.id == div.id);
-    if (list[curr_item_ind].state == "active") {
+    if (
+      (target_val == "completed" && list[curr_item_ind].state == "active") ||
+      (list[curr_item_ind].state == "active" && target_val == undefined)
+    ) {
       div.classList.add("completed");
       checkbox.checked = true;
       list[curr_item_ind].state = div.dataset.state = "completed";
       list.activeElements -= 1;
-    } else {
+    } else if (
+      (target_val == "active" && list[curr_item_ind].state == "completed") ||
+      (list[curr_item_ind].state == "completed" && target_val == undefined)
+    ) {
       div.classList.remove("completed");
       checkbox.checked = false;
       list[curr_item_ind].state = div.dataset.state = "active";
@@ -78,6 +87,7 @@ const addItem = (text) => {
     if (div.dataset.state != activeFilter && activeFilter != "all") {
       div.classList.add("hide");
     }
+    update();
   };
 };
 
@@ -85,6 +95,18 @@ const addItem = (text) => {
 const update = () => {
   updateCounter();
   updateSummaryVisability();
+  updateToggleCompleteButtonState();
+  updateClearCompletedVisability();
+};
+
+const updateClearCompletedVisability = () => {
+  if (list.length != list.activeElements) {
+    document
+      .getElementsByClassName("clear-completed")[0]
+      .classList.remove("hide");
+  } else {
+    document.getElementsByClassName("clear-completed")[0].classList.add("hide");
+  }
 };
 
 const updateCounter = () => {
@@ -101,21 +123,40 @@ const updateSummaryVisability = () => {
   }
 };
 
-const toggleCompleteButton = () => {
-  let target_val = 1;
-  list.forEach((todo, ind) => {
+const toggleCompleteButton = (button) => {
+  let target_val;
+  if (button.classList.contains("complete-button-active")) {
+    target_val = "active";
+  } else {
+    target_val = "completed";
+  }
+  list.forEach((todo) => {
     let div = document.getElementById(todo.id);
     div.toggleComplete(target_val);
   });
-  target_val = target_val == 1 ? 0 : 1;
 
   update();
+};
+
+const updateToggleCompleteButtonState = () => {
+  const button = document.getElementsByClassName("complete-button")[0];
+  if (list.activeElements == 0) {
+    button.classList.add("complete-button-active");
+  } else {
+    button.classList.remove("complete-button-active");
+  }
+
+  if (list.length == 0) {
+    button.classList.add("hide");
+  } else {
+    button.classList.remove("hide");
+  }
 };
 
 const clearCompleted = () => {
   let idToDelete = [];
   for (let i = 0; i < list.length; i++) {
-    if (list[i].state == 1) {
+    if (list[i].state == "completed") {
       document.getElementById(list[i].id).remove();
       idToDelete.push(list[i].id);
     }
