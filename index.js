@@ -14,10 +14,10 @@ const addItem = (text) => {
   div.className = "task";
   div.id = item.id;
   div.dataset.state = item.state;
-  div.dataset.clicked = false;
 
   const checkbox = document.createElement("input");
   checkbox.type = "checkbox";
+  checkbox.className = "input_type_checkbox";
   checkbox.onclick = () => {
     div.toggleComplete();
   };
@@ -30,13 +30,17 @@ const addItem = (text) => {
   deleteButton.className = "delete-button";
   deleteButton.onclick = () => {
     const ind = list.findIndex((item) => item.id == div.id);
-    list.splice(ind);
+    list.splice(ind, 1);
     div.remove();
+    if (div.dataset.state == "active") {
+      list.activeElements -= 1;
+    }
     update();
   };
 
-  content.ondblclick = () => {
+  div.ondblclick = () => {
     const edit_input = document.createElement("input");
+    edit_input.className = "input";
     edit_input.type = "text";
     edit_input.value = content.textContent;
 
@@ -92,6 +96,7 @@ const addItem = (text) => {
 
 // может это как-то покрасивее сделать
 const update = () => {
+  console.log(list);
   updateCounter();
   updateSummaryVisability();
   updateToggleCompleteButtonState();
@@ -113,11 +118,11 @@ const updateSummaryVisability = () => {
 };
 
 const updateToggleCompleteButtonState = () => {
-  const button = document.getElementsByClassName("complete-button")[0];
+  const button = document.getElementById("toggleTasksState");
   if (list.activeElements == 0) {
-    button.classList.add("complete-button-active");
+    button.classList.add("btn-primary-active");
   } else {
-    button.classList.remove("complete-button-active");
+    button.classList.remove("btn-primary-active");
   }
 
   if (list.length == 0) {
@@ -139,7 +144,7 @@ const updateClearCompletedVisability = () => {
 
 const toggleCompleteButton = (button) => {
   let target_val;
-  if (button.classList.contains("complete-button-active")) {
+  if (button.classList.contains("btn-primary-active")) {
     target_val = "active";
   } else {
     target_val = "completed";
@@ -165,7 +170,7 @@ const clearCompleted = () => {
     const ind = list.findIndex((item) => item.id == id);
     list.splice(ind, 1);
   });
-  
+
   update();
 };
 

@@ -1,0 +1,32 @@
+.btn {
+  font-family: inherit;
+  border: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  vertical-align: middle;
+}
+
+
+.btn-primary {
+  width: 118px;
+  height: 34px;
+  background-color: var(--orange100);
+  border-radius: 10px;
+}
+
+@media screen and (min-width: 1023px) {
+  .btn-primary:hover {
+    background-color: var(--green200);
+    color: var(--white);
+    border-color: var(--green200);
+    cursor: pointer;
+  }
+}
+
+.btn-primary-active {
+  background-color: var(--orange200);
+  color: var(--black);
+}

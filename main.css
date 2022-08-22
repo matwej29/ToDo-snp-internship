@@ -1,17 +1,28 @@
+@import url("import_styles.css");
 :root {
-  --dark: #836351;
-  --light: #eddcd2;
-  --white: #fff1e6;
-  --accent1: #ddbea9;
-  --accent2: #a5a58d;
+  --black: #1b1f2b;
+  --white: #ffffff;
+  --orange200: #efa501;
+  --orange100: #f8e6be;
+  --green400: #286562;
+  --green300: #3b7e7b;
+  --green200: #627f7e;
+  --green100: #e0f0e5;
+  --gray300: #a6a6a6;
+  --gray200: #d9dfdb;
+  --gray100: #f1f3f2;
+  --beige200: #f4f0e9;
+  --beige100: #f9f7f4;
 }
 
 body {
-  background-color: white;
+  background-color: var(--beige100);
   width: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-family: Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+    sans-serif;
 }
 
 .main {
@@ -19,60 +30,54 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  max-width: 550px;
+  width: 95%;
 }
 
 .input-field {
-  display: grid;
+  /* display: grid;
   grid-template-columns: 1fr 3fr;
-  border: 1px solid #e6e6e6;
-  gap: 1px;
+  grid-auto-flow: column; */
+  display: flex;
+  gap: 5px;
   align-items: center;
 }
 
-.complete-button {
-  height: 30px;
-  box-sizing: border-box;
-  border: none;
-  background-color: var(--accent2);
+.input-field button {
+  width: 25%;
 }
 
-.complete-button-active {
-  background-color: var(--dark);
-}
-
-.new-todo {
-  height: 30px;
-  box-sizing: border-box;
-  border: none;
-}
-
-.new-todo:focus {
-  border: none;
-  outline: none;
-}
 
 .todo {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  background: var(--white);
+  border-radius: 30px;
+  padding: 20px;
+  box-sizing: border-box;
+  gap: 10px;
+  min-height: 200px;
+  max-width: 550px;
+  width: 100%;
 }
 
 .todos {
   display: flex;
   flex-direction: column;
 
-  gap: 1px;
+  gap: 10px;
 }
 
 .task {
   display: flex;
-  padding: 0 5px 0 5px;
+  padding: 0 10px 0 10px;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  background-color: var(--light);
-  border: 1px solid #e6e6e6;
   min-height: 60px;
+  gap: 10px;
+  background-color: var(--beige200);
+  border-radius: 30px;
 }
 
 .task-content {
@@ -93,22 +98,39 @@ body {
 }
 
 .editing {
-  background-color: var(--accent2);
+  padding: 0 20px 0 20px;
+  background-color: var(--orange200);
+}
+
+.editing input {
+  height: 100%;
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+
+.editing input:hover{
+  background-color: transparent;
+  border: none;
+}
+
+.editing input:focus{
+  background-color: transparent;
+  border: none;
 }
 
 .summary {
   display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   align-items: center;
-
+  gap: 10px;
   box-sizing: border-box;
-  border: 1px solid #e6e6e6;
-  min-height: 40px;
   padding: 0 5px 0 5px;
 }
 
 .clear-completed {
-  text-align: center;
+  text-align: end;
 }
 
 .hide {
@@ -116,11 +138,11 @@ body {
 }
 
 .completed {
-  background-color: var(--dark);
+  background-color: var(--gray300);
 }
 
 .button-selected {
-  color: var(--accent2);
+  color: var(--orange200);
 }
 
 a {
@@ -138,11 +160,20 @@ p {
 }
 
 .filter {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: center;
+  display: grid;
+  grid-auto-flow: column;
   gap: 5px;
+}
+
+@media screen and (max-width: 1023px) {
+  .filter{
+    flex-direction: column;
+    grid-auto-flow: row;
+  }
+
+  .filter a {
+    text-align: center;
+  }
 }
 
 .filter a {
@@ -152,7 +183,5 @@ p {
 }
 
 h1 {
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   color: gray;
 }
