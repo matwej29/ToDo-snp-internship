@@ -29,8 +29,6 @@
   border: 2px solid var(--black);
   background-color: var(--white);
   border-radius: 20%;
-  /* border-image: url(./rectangle.svg); */
-  /* border-image-slice: 1 fill; */
 }
 
 .input_type_checkbox:checked {
