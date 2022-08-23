@@ -92,6 +92,10 @@ const addItem = (text) => {
     }
     update();
   };
+
+  if (activeFilter == "completed") {
+    showAll();
+  }
 };
 
 // может это как-то покрасивее сделать

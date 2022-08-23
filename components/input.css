@@ -37,3 +37,9 @@
   background-position: center;
   background-repeat: no-repeat;
 }
+
+@media screen and (min-width: 1024px) {
+  .input_type_checkbox:hover{
+    background-color: var(--gray200);
+  }
+}

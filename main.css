@@ -74,23 +74,32 @@ body {
   gap: 10px;
   background-color: var(--beige200);
   border-radius: 30px;
+  box-sizing: border-box;
 }
 
 .task-content {
   flex: 1;
   margin: 0;
-  word-wrap: break-all;
+  overflow-wrap: anywhere;
+  box-sizing: border-box;
+  max-width: 100%;
 }
 
 .delete-button {
-  width: 15px;
-  height: 15px;
-  border: none;
+  box-sizing: border-box;
+  width: 20px;
+  height: 20px;
+  border: 0.5px solid transparent;
+  border-radius: 10px;
   padding: 0;
-  background-color: transparent;
   background-image: url("./icons/delete.svg");
   background-position: center;
   background-repeat: no-repeat;
+  flex-shrink: 0;
+}
+
+.delete-button:hover {
+  background-color: var(--gray200);
 }
 
 .editing {
@@ -106,12 +115,12 @@ body {
   outline: none;
 }
 
-.editing input:hover{
+.editing input:hover {
   background-color: transparent;
   border: none;
 }
 
-.editing input:focus{
+.editing input:focus {
   background-color: transparent;
   border: none;
 }
@@ -161,8 +170,14 @@ p {
   gap: 5px;
 }
 
+@media screen and (min-width: 1024px) {
+  .filter a:hover {
+    background-color: var(--gray200);
+  }
+}
+
 @media screen and (max-width: 1023px) {
-  .filter{
+  .filter {
     flex-direction: column;
     grid-auto-flow: row;
   }
