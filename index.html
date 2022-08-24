@@ -14,7 +14,7 @@
       <div class="todo">
         <div class="input-field">
           <button onclick="toggleCompleteButton(this)" id="toggleTasksState" class="btn btn-primary hide">toggle state</button>
-          <input type="text" class="input" onchange="if (this.value != ''){addItem(this.value); this.value = ''}" autofocus/>
+          <input type="text" class="input" onchange="if (this.value.trim() != ''){addItem(this.value); this.value = ''} else this.value = ''" autofocus/>
         </div>
         <div class="todos">
           <!-- todo -->

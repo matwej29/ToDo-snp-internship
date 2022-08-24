@@ -64,6 +64,10 @@ const addItem = (text) => {
     edit_input.focus();
   };
 
+  if (div.dataset.state != activeFilter && activeFilter != "all") {
+    div.classList.add("hide");
+  }
+
   div.append(checkbox, content, deleteButton);
   document.getElementsByClassName("todos")[0].append(div);
   update();
@@ -87,15 +91,12 @@ const addItem = (text) => {
       list[curr_item_ind].state = div.dataset.state = "active";
       list.activeElements += 1;
     }
+    
     if (div.dataset.state != activeFilter && activeFilter != "all") {
       div.classList.add("hide");
     }
     update();
   };
-
-  if (activeFilter == "completed") {
-    showAll();
-  }
 };
 
 // может это как-то покрасивее сделать
