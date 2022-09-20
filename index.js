@@ -1,13 +1,17 @@
 const list = [];
-list.activeElements = 0;
+let activeElements = 0;
 let activeFilter = "all";
 
 let next_id = 0;
 
-const addItem = (text) => {
+const addItem = (input) => {
+  if (input.value.trim() == "") return;
+  const text = input.value;
+  input.value = "";
+
   // state: "active", "completed"
   const item = { state: "active", text: text, id: next_id++ };
-  list.activeElements += 1;
+  activeElements += 1;
   list.push(item);
 
   const div = document.createElement("div");
@@ -33,7 +37,7 @@ const addItem = (text) => {
     list.splice(ind, 1);
     div.remove();
     if (div.dataset.state == "active") {
-      list.activeElements -= 1;
+      activeElements -= 1;
     }
     update();
   };
@@ -81,7 +85,7 @@ const addItem = (text) => {
       div.classList.add("completed");
       checkbox.checked = true;
       list[curr_item_ind].state = div.dataset.state = "completed";
-      list.activeElements -= 1;
+      activeElements -= 1;
     } else if (
       (target_val == "active" && list[curr_item_ind].state == "completed") ||
       (list[curr_item_ind].state == "completed" && target_val == undefined)
@@ -89,7 +93,7 @@ const addItem = (text) => {
       div.classList.remove("completed");
       checkbox.checked = false;
       list[curr_item_ind].state = div.dataset.state = "active";
-      list.activeElements += 1;
+      activeElements += 1;
     }
     
     if (div.dataset.state != activeFilter && activeFilter != "all") {
@@ -111,7 +115,7 @@ const update = () => {
 const updateCounter = () => {
   document.getElementById(
     "itemsLeft"
-  ).textContent = `${list.activeElements} items left`;
+  ).textContent = `${activeElements} items left`;
 };
 
 const updateSummaryVisability = () => {
@@ -124,7 +128,7 @@ const updateSummaryVisability = () => {
 
 const updateToggleCompleteButtonState = () => {
   const button = document.getElementById("toggleTasksState");
-  if (list.activeElements == 0) {
+  if (activeElements == 0) {
     button.classList.add("btn-primary-active");
   } else {
     button.classList.remove("btn-primary-active");
@@ -138,7 +142,7 @@ const updateToggleCompleteButtonState = () => {
 };
 
 const updateClearCompletedVisability = () => {
-  if (list.length != list.activeElements) {
+  if (list.length != activeElements) {
     document
       .getElementsByClassName("clear-completed")[0]
       .classList.remove("hide");
