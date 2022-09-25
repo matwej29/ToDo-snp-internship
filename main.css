@@ -21,8 +21,8 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-family: Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
-    sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
 .main {
@@ -31,107 +31,6 @@ body {
   align-items: center;
   justify-content: center;
   width: 95%;
-}
-
-.input-field {
-  display: flex;
-  gap: 5px;
-  align-items: center;
-}
-
-.input-field button {
-  width: 25%;
-}
-
-.todo {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  background: var(--white);
-  border-radius: 30px;
-  padding: 20px;
-  box-sizing: border-box;
-  gap: 10px;
-  min-height: 200px;
-  max-width: 550px;
-  width: 100%;
-}
-
-.todos {
-  display: flex;
-  flex-direction: column;
-
-  gap: 10px;
-}
-
-.task {
-  display: flex;
-  padding: 10px 10px 10px 10px;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  min-height: 60px;
-  gap: 10px;
-  background-color: var(--beige200);
-  border-radius: 30px;
-  box-sizing: border-box;
-}
-
-.task-content {
-  flex: 1;
-  margin: 0;
-  overflow-wrap: anywhere;
-  box-sizing: border-box;
-  max-width: 100%;
-}
-
-.delete-button {
-  box-sizing: border-box;
-  width: 20px;
-  height: 20px;
-  border: 0.5px solid transparent;
-  border-radius: 10px;
-  padding: 0;
-  background-image: url("./icons/delete.svg");
-  background-position: center;
-  background-repeat: no-repeat;
-  flex-shrink: 0;
-}
-
-.delete-button:hover {
-  background-color: var(--gray200);
-}
-
-.editing {
-  padding: 0 20px 0 20px;
-  background-color: var(--orange200);
-}
-
-.editing input {
-  height: 100%;
-  width: 100%;
-  background-color: transparent;
-  border: none;
-  outline: none;
-}
-
-.editing input:hover {
-  background-color: transparent;
-  border: none;
-}
-
-.editing input:focus {
-  background-color: transparent;
-  border: none;
-}
-
-.summary {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  align-items: center;
-  gap: 10px;
-  box-sizing: border-box;
-  padding: 0 5px 0 5px;
 }
 
 .clear-completed {
@@ -150,49 +49,6 @@ body {
   color: var(--orange200);
 }
 
-a {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  appearance: none;
-  text-decoration: none;
-  color: gray;
-}
-
 p {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   margin: 0;
-}
-
-.filter {
-  display: grid;
-  grid-auto-flow: column;
-  gap: 5px;
-}
-
-@media screen and (min-width: 1024px) {
-  .filter a:hover {
-    background-color: var(--gray200);
-  }
-}
-
-@media screen and (max-width: 1023px) {
-  .filter {
-    flex-direction: column;
-    grid-auto-flow: row;
-  }
-
-  .filter a {
-    text-align: center;
-  }
-}
-
-.filter a {
-  border: 1px solid gray;
-  border-radius: 3px;
-  padding: 3px 7px;
-}
-
-h1 {
-  color: gray;
 }

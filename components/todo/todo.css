@@ -1,0 +1,13 @@
+.todo {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: var(--white);
+  border-radius: 30px;
+  padding: 20px;
+  box-sizing: border-box;
+  gap: 10px;
+  min-height: 200px;
+  max-width: 550px;
+  width: 100%;
+}

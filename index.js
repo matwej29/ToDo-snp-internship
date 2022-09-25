@@ -28,10 +28,10 @@ const addItem = (input) => {
 
   const content = document.createElement("p");
   content.textContent = item.text;
-  content.classList = "task-content";
+  content.classList = "task__content";
 
   const deleteButton = document.createElement("button");
-  deleteButton.className = "delete-button";
+  deleteButton.className = "task__button_type_delete";
   deleteButton.onclick = () => {
     const ind = list.findIndex((item) => item.id == div.id);
     list.splice(ind, 1);
@@ -48,14 +48,14 @@ const addItem = (input) => {
     edit_input.type = "text";
     edit_input.value = content.textContent;
 
-    div.classList.add("editing");
+    div.classList.add("task_state_editing");
     deleteButton.classList.add("hide");
     checkbox.classList.add("hide");
     content.classList.add("hide");
 
     content.after(edit_input);
     edit_input.onblur = edit_input.onchange = () => {
-      div.classList.remove("editing");
+      div.classList.remove("task_state_editing");
       deleteButton.classList.remove("hide");
       checkbox.classList.remove("hide");
       content.classList.remove("hide");
@@ -73,7 +73,7 @@ const addItem = (input) => {
   }
 
   div.append(checkbox, content, deleteButton);
-  document.getElementsByClassName("todos")[0].append(div);
+  document.getElementsByClassName("todo__list")[0].append(div);
   update();
 
   div.toggleComplete = (target_val) => {
@@ -107,7 +107,7 @@ const addItem = (input) => {
 const update = () => {
   console.log(list);
   updateCounter();
-  updateSummaryVisability();
+  updatetodo__footerVisability();
   updateToggleCompleteButtonState();
   updateClearCompletedVisability();
 };
@@ -118,11 +118,11 @@ const updateCounter = () => {
   ).textContent = `${activeElements} items left`;
 };
 
-const updateSummaryVisability = () => {
+const updatetodo__footerVisability = () => {
   if (list.length == 0) {
-    document.getElementsByClassName("summary")[0].classList.add("hide");
+    document.getElementsByClassName("todo__footer")[0].classList.add("hide");
   } else {
-    document.getElementsByClassName("summary")[0].classList.remove("hide");
+    document.getElementsByClassName("todo__footer")[0].classList.remove("hide");
   }
 };
 
@@ -184,7 +184,7 @@ const clearCompleted = () => {
 };
 
 const clearFilterButtonsSelection = () => {
-  const buttons = document.getElementsByClassName("filter")[0].children;
+  const buttons = document.getElementsByClassName("todo__filters")[0].children;
   for (item of buttons) {
     item.classList.remove("button-selected");
   }

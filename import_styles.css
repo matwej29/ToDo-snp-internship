@@ -1,2 +1,14 @@
 @import url("./components/button.css");
 @import url("./components/input.css");
+@import url("./components/link/link.css");
+
+@import url("./components/task/__button/_type/_delete/task__button_type_delete.css");
+@import url("./components/task/__content/task__content.css");
+@import url("./components/task/_state/_editing/task_state_editing.css");
+@import url("./components/task/task.css");
+
+@import url("./components/todo/__filters/todo__filters.css");
+@import url("./components/todo/__footer/todo__footer.css");
+@import url("./components/todo/__input/todo__input.css");
+@import url("./components/todo/__list/todo__list.css");
+@import url("./components/todo/todo.css");

@@ -12,21 +12,21 @@
     <div class="main">
       <h1>todos</h1>
       <div class="todo">
-        <div class="input-field">
+        <div class="todo__input">
           <button onclick="toggleCompleteButton(this)" id="toggleTasksState" class="btn btn-primary hide">toggle state</button>
-          <input type="text" class="input" onchange="if (this.value.trim() != ''){addItem(this.value); this.value = ''} else this.value = ''" autofocus/>
+          <input type="text" class="input" onchange="addItem(this)" autofocus/>
         </div>
-        <div class="todos">
+        <div class="todo__list">
           <!-- todo -->
         </div>
-        <div class="summary hide">
+        <div class="todo__footer hide">
           <p id="itemsLeft">n left</p>
-          <div class="filter">
-            <a href="#" onclick="showAll()" id="button-all" class="button-selected">All</a>
-            <a href="#" onclick="showActive()" id="button-active">Active</a>
-            <a href="#" onclick="showCompleted()" id="button-completed">Completed</a>
+          <div class="todo__filters">
+            <a href="#" onclick="showAll()" id="button-all" class="link button-selected">All</a>
+            <a href="#" onclick="showActive()" id="button-active" class="link">Active</a>
+            <a href="#" onclick="showCompleted()" id="button-completed" class="link">Completed</a>
           </div>
-          <a href="#" onclick="clearCompleted()" class="clear-completed">clear completed</a>
+          <a href="#" onclick="clearCompleted()" class="link clear-completed">clear completed</a>
         </div>
       </div>
     </div>
