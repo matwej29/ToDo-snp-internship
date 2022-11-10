@@ -1,113 +1,16 @@
-const list = [];
-let activeElements = 0;
-let activeFilter = "all";
-
-let next_id = 0;
-
-const addItem = (input) => {
-  if (input.value.trim() == "") return;
-  const text = input.value;
-  input.value = "";
-
-  // state: "active", "completed"
-  const item = { state: "active", text: text, id: next_id++ };
-  activeElements += 1;
-  list.push(item);
-
-  const div = document.createElement("div");
-  div.className = "task";
-  div.id = item.id;
-  div.dataset.state = item.state;
-
-  const checkbox = document.createElement("input");
-  checkbox.type = "checkbox";
-  checkbox.className = "input_type_checkbox";
-  checkbox.onclick = () => {
-    div.toggleComplete();
-  };
-
-  const content = document.createElement("p");
-  content.textContent = item.text;
-  content.classList = "task__content";
-
-  const deleteButton = document.createElement("button");
-  deleteButton.className = "task__button_type_delete";
-  deleteButton.onclick = () => {
-    const ind = list.findIndex((item) => item.id == div.id);
-    list.splice(ind, 1);
-    div.remove();
-    if (div.dataset.state == "active") {
-      activeElements -= 1;
-    }
-    update();
-  };
-
-  div.ondblclick = () => {
-    const edit_input = document.createElement("input");
-    edit_input.className = "input";
-    edit_input.type = "text";
-    edit_input.value = content.textContent;
-
-    div.classList.add("task_state_editing");
-    deleteButton.classList.add("hide");
-    checkbox.classList.add("hide");
-    content.classList.add("hide");
-
-    content.after(edit_input);
-    edit_input.onblur = edit_input.onchange = () => {
-      div.classList.remove("task_state_editing");
-      deleteButton.classList.remove("hide");
-      checkbox.classList.remove("hide");
-      content.classList.remove("hide");
-
-      const ind = list.findIndex((item) => item.id == div.id);
-      content.textContent = edit_input.value;
-      list[ind].text = edit_input.value;
-      edit_input.remove();
-    };
-    edit_input.focus();
-  };
-
-  if (div.dataset.state != activeFilter && activeFilter != "all") {
-    div.classList.add("hide");
-  }
-
-  div.append(checkbox, content, deleteButton);
-  document.getElementsByClassName("todo__list")[0].append(div);
-  update();
-
-  div.toggleComplete = (target_val) => {
-    const curr_item_ind = list.findIndex((elem) => elem.id == div.id);
-    if (
-      (target_val == "completed" && list[curr_item_ind].state == "active") ||
-      (list[curr_item_ind].state == "active" && target_val == undefined)
-    ) {
-      div.classList.add("completed");
-      checkbox.checked = true;
-      list[curr_item_ind].state = div.dataset.state = "completed";
-      activeElements -= 1;
-    } else if (
-      (target_val == "active" && list[curr_item_ind].state == "completed") ||
-      (list[curr_item_ind].state == "completed" && target_val == undefined)
-    ) {
-      div.classList.remove("completed");
-      checkbox.checked = false;
-      list[curr_item_ind].state = div.dataset.state = "active";
-      activeElements += 1;
-    }
-    
-    if (div.dataset.state != activeFilter && activeFilter != "all") {
-      div.classList.add("hide");
-    }
-    update();
-  };
-};
+import {
+  task,
+  inputTask,
+  todo_template,
+  footer,
+  footer_template,
+} from "./view";
+import { createTask } from "./controllers";
 
 // может это как-то покрасивее сделать
 const update = () => {
-  console.log(list);
   updateCounter();
-  updatetodo__footerVisability();
+  updateFooterVisability();
   updateToggleCompleteButtonState();
   updateClearCompletedVisability();
 };
@@ -118,7 +21,7 @@ const updateCounter = () => {
   ).textContent = `${activeElements} items left`;
 };
 
-const updatetodo__footerVisability = () => {
+const updateFooterVisability = () => {
   if (list.length == 0) {
     document.getElementsByClassName("todo__footer")[0].classList.add("hide");
   } else {
@@ -151,6 +54,7 @@ const updateClearCompletedVisability = () => {
   }
 };
 
+// TODO
 const toggleCompleteButton = (button) => {
   let target_val;
   if (button.classList.contains("btn-primary-active")) {
@@ -166,6 +70,7 @@ const toggleCompleteButton = (button) => {
   update();
 };
 
+// TODO
 const clearCompleted = () => {
   let idToDelete = [];
   for (let i = 0; i < list.length; i++) {
@@ -189,7 +94,7 @@ const clearFilterButtonsSelection = () => {
     item.classList.remove("button-selected");
   }
 };
-
+// TODO
 const showAll = () => {
   activeFilter = "all";
   clearFilterButtonsSelection();
@@ -200,7 +105,7 @@ const showAll = () => {
     item.classList.remove("hide");
   }
 };
-
+// TODO
 const showActive = () => {
   activeFilter = "active";
   clearFilterButtonsSelection();
@@ -212,7 +117,7 @@ const showActive = () => {
     else item.classList.add("hide");
   }
 };
-
+// TODO
 const showCompleted = () => {
   activeFilter = "completed";
   clearFilterButtonsSelection();
@@ -224,3 +129,16 @@ const showCompleted = () => {
     else item.classList.add("hide");
   }
 };
+
+const inputNewTodo = inputTask(toggleCompleteButton, createTask);
+const footer = footer_template(
+  showAll,
+  showActive,
+  showCompleted,
+  clearCompleted
+);
+
+const todo = document.createElement("div");
+todo.innerHTML = todo_template(inputNewTodo, footer);
+console.log(todo_template(inputNewTodo, footer));
+document.getElementsByClassName("main")[0].append(todo.content);
