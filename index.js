@@ -1,8 +1,7 @@
 import {
   task,
-  inputTask,
+  todoInputTask,
   todo_template,
-  footer,
   footer_template,
 } from "./view";
 import { createTask } from "./controllers";
@@ -55,7 +54,9 @@ const updateClearCompletedVisability = () => {
 };
 
 // TODO
-const toggleCompleteButton = (button) => {
+const toggleCompleteButton = (event) => {
+  return;
+  const button = undefined;
   let target_val;
   if (button.classList.contains("btn-primary-active")) {
     target_val = "active";
@@ -71,7 +72,8 @@ const toggleCompleteButton = (button) => {
 };
 
 // TODO
-const clearCompleted = () => {
+const clearCompleted = (event) => {
+  return;
   let idToDelete = [];
   for (let i = 0; i < list.length; i++) {
     if (list[i].state == "completed") {
@@ -87,7 +89,7 @@ const clearCompleted = () => {
 
   update();
 };
-
+// TODO
 const clearFilterButtonsSelection = () => {
   const buttons = document.getElementsByClassName("todo__filters")[0].children;
   for (item of buttons) {
@@ -95,7 +97,7 @@ const clearFilterButtonsSelection = () => {
   }
 };
 // TODO
-const showAll = () => {
+const showAll = (event) => {
   activeFilter = "all";
   clearFilterButtonsSelection();
   document.getElementById("button-all").classList.add("button-selected");
@@ -106,7 +108,7 @@ const showAll = () => {
   }
 };
 // TODO
-const showActive = () => {
+const showActive = (event) => {
   activeFilter = "active";
   clearFilterButtonsSelection();
   document.getElementById("button-active").classList.add("button-selected");
@@ -118,7 +120,7 @@ const showActive = () => {
   }
 };
 // TODO
-const showCompleted = () => {
+const showCompleted = (event) => {
   activeFilter = "completed";
   clearFilterButtonsSelection();
   document.getElementById("button-completed").classList.add("button-selected");
@@ -130,7 +132,7 @@ const showCompleted = () => {
   }
 };
 
-const inputNewTodo = inputTask(toggleCompleteButton, createTask);
+const inputNewTodo = todoInputTask(toggleCompleteButton, createTask);
 const footer = footer_template(
   showAll,
   showActive,
@@ -138,7 +140,6 @@ const footer = footer_template(
   clearCompleted
 );
 
-const todo = document.createElement("div");
-todo.innerHTML = todo_template(inputNewTodo, footer);
-console.log(todo_template(inputNewTodo, footer));
-document.getElementsByClassName("main")[0].append(todo.content);
+const todo = todo_template(inputNewTodo, footer);
+console.log(todo);
+document.getElementsByClassName("main")[0].append(todo);
