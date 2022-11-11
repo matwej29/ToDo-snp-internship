@@ -27,9 +27,19 @@ class Task {
 
 class Tasks {
   #next_id = 0;
+  #activeTasksAmount = 0;
 
   constructor() {
     this.tasks = [];
+  }
+
+  getLength() {
+    return this.tasks.length;
+  }
+
+  // TODO
+  getActiveTasksAmount() {
+    return this.filterActive().length;
   }
 
   addTask(text, taskOnDblClick, onClickDelete) {
@@ -64,6 +74,18 @@ class Tasks {
       (task) => task.state === Task.TASK_TYPES.COMPLETED
     );
   }
+
+  clearCompleted() {
+    let to_delete = [];
+
+    this.tasks.map((task) => {
+      if (task.state == TASK_TYPES.COMPLETED) {
+        to_delete.push(task);
+      }
+    });
+
+    to_delete.map((task) => this.deleteTask(task.id));
+  }
 }
 
-export {Task, Tasks};
+export { Task, Tasks };
