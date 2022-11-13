@@ -1,14 +1,12 @@
-class Task {
-  TASK_TYPES = Object.freeze({
-    ALL: "all",
-    ACTIVE: "active",
-    COMPLETED: "completed",
-  });
+const TASK_TYPES = Object.freeze({
+  ALL: "all",
+  ACTIVE: "active",
+  COMPLETED: "completed",
+});
 
+class Task {
   constructor(text, taskOnDblClick, onClickDelete, id) {
     this.text = text;
-    this.taskOnDblClick = taskOnDblClick;
-    this.onClickDelete = onClickDelete;
     this.state = this.TASK_TYPES.ACTIVE;
     this.id = id;
   }
@@ -25,7 +23,7 @@ class Task {
   }
 }
 
-class Tasks {
+class Task_list {
   #next_id = 0;
   #activeTasksAmount = 0;
 
@@ -42,8 +40,8 @@ class Tasks {
     return this.filterActive().length;
   }
 
-  addTask(text, taskOnDblClick, onClickDelete) {
-    const task = new Task(text, taskOnDblClick, onClickDelete, this.#next_id);
+  addTask(text) {
+    const task = new Task(text, this.#next_id);
     this.tasks.push(task);
     this.#next_id += 1;
   }
@@ -88,4 +86,4 @@ class Tasks {
   }
 }
 
-export { Task, Tasks };
+export { Task, Task_list, TASK_TYPES };
