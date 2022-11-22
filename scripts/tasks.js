@@ -33,7 +33,6 @@ class Task_list {
     return this.tasks.length;
   }
 
-  // TODO
   getActiveTasksAmount() {
     return this.filterActive().length;
   }
@@ -69,20 +68,14 @@ class Task_list {
 
   filterCompleted() {
     return this.tasks.filter(
-      (task) => task.state === Task.TASK_TYPES.COMPLETED
+      (task) => task.state === TASK_TYPES.COMPLETED
     );
   }
 
   clearCompleted() {
-    let to_delete = [];
-
-    this.tasks.map((task) => {
-      if (task.state === TASK_TYPES.COMPLETED) {
-        to_delete.push(task);
-      }
-    });
-
-    to_delete.map((task) => this.deleteTask(task.id));
+    this.tasks = this.tasks.filter(
+      (task) => task.state !== TASK_TYPES.COMPLETED
+    );
   }
 }
 

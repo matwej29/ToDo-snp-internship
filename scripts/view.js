@@ -108,6 +108,7 @@ const footer_template = (
   todo__filters.append(filterAll, filterActive, filterCompleted);
 
   const clearCompletedButton = document.createElement("a");
+  clearCompletedButton.textContent = "clear completed"
   clearCompletedButton.href = "#";
   clearCompletedButton.id = "clear-completed";
   clearCompletedButton.className = "link clear-completed";

@@ -1,4 +1,4 @@
-import { task, todoInputTask, footer_template } from "./view";
+import { task, todoInputTask, footer_template } from "./scripts/view";
 import {
   createTask,
   toggleCompleteButton,
@@ -6,7 +6,7 @@ import {
   showActive,
   showCompleted,
   clearCompleted,
-} from "./controllers";
+} from "./scripts/controllers";
 
 const inputNewTodo = todoInputTask(toggleCompleteButton, createTask);
 const footer = footer_template(

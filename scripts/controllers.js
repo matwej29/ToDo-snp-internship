@@ -159,11 +159,10 @@ const updateClearCompletedVisability = () => {
   if (tasks.getLength() !== tasks.getActiveTasksAmount()) {
     clearCompletedButton.classList.remove("hide");
   } else {
-    document.getElementsByClassName("clear-completed")[0].classList.add("hide");
+    clearCompletedButton.classList.add("hide");
   }
 };
 
-// FIXME
 const toggleCompleteButton = (event) => {
   const toggleTasksStateButton = document.getElementById("toggleTasksState");
   let target_val = null;
@@ -179,8 +178,8 @@ const toggleCompleteButton = (event) => {
   redrawAllTasks();
 };
 
-// TODO
 const clearCompleted = (event) => {
+  event.preventDefault();
   tasks.clearCompleted();
 
   update();
