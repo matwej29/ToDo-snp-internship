@@ -5,21 +5,15 @@ const TASK_TYPES = Object.freeze({
 });
 
 class Task {
-  constructor(text, taskOnDblClick, onClickDelete, id) {
+  constructor(text, id) {
     this.text = text;
-    this.state = this.TASK_TYPES.ACTIVE;
+    this.state = TASK_TYPES.ACTIVE;
     this.id = id;
   }
 
-  get state() {
-    return this.state;
-  }
-
-  /**
-   * @param {TASK_TYPES} new_state
-   */
-  set state(new_state) {
-    this.state = new_state;
+  toggleState() {
+    if (this.state === TASK_TYPES.ACTIVE) this.state = TASK_TYPES.COMPLETED;
+    else this.state = TASK_TYPES.ACTIVE;
   }
 }
 
@@ -29,6 +23,10 @@ class Task_list {
 
   constructor() {
     this.tasks = [];
+  }
+
+  getTasks() {
+    return this.tasks;
   }
 
   getLength() {
@@ -44,6 +42,8 @@ class Task_list {
     const task = new Task(text, this.#next_id);
     this.tasks.push(task);
     this.#next_id += 1;
+
+    return task;
   }
 
   getTaskByID(id) {
@@ -64,7 +64,7 @@ class Task_list {
   }
 
   filterActive() {
-    return this.tasks.filter((task) => task.state === Task.TASK_TYPES.ACTIVE);
+    return this.tasks.filter((task) => task.state === TASK_TYPES.ACTIVE);
   }
 
   filterCompleted() {
@@ -77,7 +77,7 @@ class Task_list {
     let to_delete = [];
 
     this.tasks.map((task) => {
-      if (task.state == TASK_TYPES.COMPLETED) {
+      if (task.state === TASK_TYPES.COMPLETED) {
         to_delete.push(task);
       }
     });

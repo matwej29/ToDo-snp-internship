@@ -1,4 +1,4 @@
-import { task, todoInputTask, todo_template, footer_template } from "./view";
+import { task, todoInputTask, footer_template } from "./view";
 import {
   createTask,
   toggleCompleteButton,
@@ -16,6 +16,7 @@ const footer = footer_template(
   clearCompleted
 );
 
-const todo = todo_template(inputNewTodo, footer);
-console.log(todo);
+const todo = document.getElementById("todos");
+todo.prepend(inputNewTodo);
+todo.append(footer);
 document.getElementsByClassName("main")[0].append(todo);

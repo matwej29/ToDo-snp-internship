@@ -1,55 +1,60 @@
-const todo_template = (input, footer) => {
+import { TASK_TYPES } from "./tasks";
+
+const todo_template = (text, taskOnDblClick, onClickDelete, id, toggleTaskState, taskState=TASK_TYPES.ACTIVE) => {
   const todo = document.createElement("div");
-  todo.className = "todo";
+  todo.className = "task";
+  todo.addEventListener("dblclick", taskOnDblClick);
+  todo.dataset.id = id;
 
-  const todo__list = document.createElement("div");
-  todo__list.className = "todo__list";
+  const todo_toggle_state = document.createElement("input");
+  todo_toggle_state.type = "checkbox";
+  todo_toggle_state.dataset.id = id;
+  todo_toggle_state.addEventListener("click", toggleTaskState);
 
-  todo.append(input, todo__list, footer);
+  const todo_content = document.createElement("p");
+  todo_content.className = "task__content";
+  todo_content.textContent = text;
+  todo_content.dataset.id = id;
+
+  const todo_delete_button = document.createElement("button");
+  todo_delete_button.className = "task__button_type_delete";
+  todo_delete_button.addEventListener("click", onClickDelete);
+  todo_delete_button.dataset.id = id;
+
+
+
+  if (taskState === TASK_TYPES.ACTIVE) {
+    todo.classList.remove("task_state_completed");
+    todo_toggle_state.checked = false;
+  } else if (taskState === TASK_TYPES.COMPLETED) {
+    todo.classList.add("task_state_completed");
+    todo_toggle_state.checked = true;
+  }
+
+  todo.append(todo_toggle_state, todo_content, todo_delete_button);
 
   return todo;
 };
 
-const task = (text, taskOnDblClick, onClickDelete, id) => {
-  const task = document.createElement("div");
-  task.className = "task";
-  task.addEventListener("dbclick", taskOnDblClick);
-
-  const task_input = document.createElement("input");
-  task_input.type = "checkbox";
-
-  const task_content = document.createElement("p");
-  task_content.className = "task__content";
-  task_content.value = text;
-
-  const task_delete_button = document.createElement("button");
-  task_delete_button.className = "task__button_type_delete";
-  task_delete_button.addEventListener("click", onClickDelete);
-
-  task.append(task_input, task_content, task_delete_button);
-
-  return task;
-};
-
 const todoInputTask = (toggleComplete, addItem) => {
-  const todoInputBlock = document.createElement("div");
-  todoInputBlock.className = "todo__input";
+  const new_task_container = document.createElement("div");
+  new_task_container.className = "todo__input";
 
-  const toggleCompleteButton = document.createElement("button");
-  toggleCompleteButton.id = "toggleTasksState";
-  toggleCompleteButton.className = "btn btn-primary hide";
-  toggleCompleteButton.value = "toggle state";
-  toggleCompleteButton.addEventListener("click", toggleComplete);
+  const toggle_todo_state_button = document.createElement("button");
+  toggle_todo_state_button.id = "toggleTasksState";
+  toggle_todo_state_button.className = "btn btn-primary hide";
+  toggle_todo_state_button.textContent = "toggle state";
+  toggle_todo_state_button.addEventListener("click", toggleComplete);
 
-  const input = document.createElement("input");
-  input.type = "text";
-  input.className = "input";
-  input.autofocus = true;
-  input.addEventListener("change", addItem);
+  const new_todo_input = document.createElement("input");
+  new_todo_input.type = "text";
+  new_todo_input.className = "input";
+  new_todo_input.autofocus = true;
+  new_todo_input.addEventListener("change", addItem);
 
-  todoInputBlock.append(toggleCompleteButton, input);
+  new_task_container.append(toggle_todo_state_button, new_todo_input);
 
-  return todoInputBlock;
+  return new_task_container;
 };
 
 const edit_input = (value, onChange) => {
@@ -57,8 +62,8 @@ const edit_input = (value, onChange) => {
   input.className = "input";
   input.type = "text";
   input.value = value;
-  input.addEventListener("blur", onChange);
   input.addEventListener("change", onChange);
+  input.addEventListener("blur", onChange);
 
   return input;
 };
@@ -79,8 +84,9 @@ const footer_template = (
   filterCompletedOnClick,
   clearCompleted
 ) => {
-  const todo__footer = document.createElement("div");
-  todo__footer.className = "todo__footer hide";
+  const todo_footer = document.createElement("div");
+  todo_footer.className = "todo__footer hide";
+  todo_footer.id = "todo_footer";
 
   const itemsLeft = document.createElement("p");
   itemsLeft.id = "itemsLeft";
@@ -88,8 +94,9 @@ const footer_template = (
 
   const todo__filters = document.createElement("div");
   todo__filters.className = "todo__filters";
+  todo__filters.id = "todo_filters";
 
-  const filterAll = createFilter("filterAll", "All", selected=true);
+  const filterAll = createFilter("filterAll", "All", (selected = true));
   filterAll.addEventListener("click", filterAllOnClick);
 
   const filterActive = createFilter("filterActive", "Active");
@@ -102,12 +109,13 @@ const footer_template = (
 
   const clearCompletedButton = document.createElement("a");
   clearCompletedButton.href = "#";
+  clearCompletedButton.id = "clear-completed";
   clearCompletedButton.className = "link clear-completed";
   clearCompletedButton.addEventListener("click", clearCompleted);
 
-  todo__footer.append(itemsLeft, todo__filters, clearCompletedButton);
+  todo_footer.append(itemsLeft, todo__filters, clearCompletedButton);
 
-  return todo__footer;
+  return todo_footer;
 };
 
-export { task, todoInputTask, edit_input, footer_template, todo_template };
+export { todo_template, todoInputTask, edit_input, footer_template };
