@@ -19,7 +19,6 @@ class Task {
 
 class Task_list {
   #next_id = 0;
-  #activeTasksAmount = 0;
 
   constructor() {
     this.tasks = [];
@@ -51,7 +50,10 @@ class Task_list {
 
   deleteTask(id) {
     const ind = this.tasks.findIndex((task) => task.id === id);
-    this.tasks.splice(ind);
+    if (ind === -1) {
+      throw Error("Task not found");
+    }
+    this.tasks.splice(ind, 1);
   }
 
   toggleTasksState(target_value) {
@@ -67,9 +69,7 @@ class Task_list {
   }
 
   filterCompleted() {
-    return this.tasks.filter(
-      (task) => task.state === TASK_TYPES.COMPLETED
-    );
+    return this.tasks.filter((task) => task.state === TASK_TYPES.COMPLETED);
   }
 
   clearCompleted() {

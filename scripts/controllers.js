@@ -17,7 +17,8 @@ const getTaskDocumentElementById = (id) => {
 };
 
 const deleteButtonOnClick = (event) => {
-  tasks.deleteTask(event.target.dataset.id);
+  tasks.deleteTask(+event.target.parentNode.dataset.id);
+  event.target.parentNode.remove();
   update();
 };
 
