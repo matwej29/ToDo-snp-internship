@@ -84,7 +84,7 @@ const update = () => {
   updateFooterVisibility();
   updateCounter();
   updateToggleCompleteButtonState();
-  updateClearCompletedVisability();
+  updateClearCompletedVisibility();
 };
 
 const redrawAllTasks = () => {
@@ -154,7 +154,7 @@ const updateToggleCompleteButtonState = () => {
   }
 };
 
-const updateClearCompletedVisability = () => {
+const updateClearCompletedVisibility = () => {
   const clearCompletedButton = document.getElementById("clear-completed");
   if (tasks.getLength() !== tasks.getActiveTasksAmount()) {
     clearCompletedButton.classList.remove("hide");
