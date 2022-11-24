@@ -164,13 +164,11 @@ const updateClearCompletedVisability = () => {
 };
 
 const toggleCompleteButton = (event) => {
-  const toggleTasksStateButton = document.getElementById("toggleTasksState");
-  let target_val = null;
-  if (toggleTasksStateButton.classList.contains("btn-primary-active")) {
-    target_val = TASK_TYPES.ACTIVE;
-  } else {
-    target_val = TASK_TYPES.COMPLETED;
-  }
+  const isButtonActive =
+    toggleTasksStateButton.classList.contains("btn-primary-active");
+  tasks.toggleTasksState(
+    isButtonActive ? TASK_TYPES.ACTIVE : TASK_TYPES.COMPLETED
+  );
 
   tasks.toggleTasksState(target_val);
 
