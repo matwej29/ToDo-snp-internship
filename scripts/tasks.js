@@ -17,7 +17,7 @@ class Task {
   }
 }
 
-class Task_list {
+class TaskList {
   #next_id = 0;
 
   constructor() {
@@ -79,4 +79,4 @@ class Task_list {
   }
 }
 
-export { Task, Task_list, TASK_TYPES };
+export { Task, TaskList, TASK_TYPES };

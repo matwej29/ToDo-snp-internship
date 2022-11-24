@@ -1,7 +1,7 @@
-import { Task_list, TASK_TYPES } from "./tasks";
+import { TaskList, TASK_TYPES } from "./tasks";
 import { edit_input, todo_template } from "./view";
 
-const tasks = new Task_list();
+const tasks = new TaskList();
 let activeFilter = TASK_TYPES.ALL;
 
 // helper
