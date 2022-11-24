@@ -1,9 +1,9 @@
-.todo__input {
+.todos__input {
   display: flex;
   gap: 5px;
   align-items: center;
 }
 
-.todo__input button {
+.todos__input button {
   width: 25%;
 }

@@ -1,0 +1,14 @@
+.todos__clear-completed {
+  text-align: end;
+  font: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  padding: none;
+  color: var(--green300);
+}
+
+@media screen and (min-width: 1024px) {
+  .todos__clear-completed:hover {
+    color: var(--black);
+  }
+}

@@ -1,14 +1,14 @@
 import { TaskList, TASK_TYPES } from "./tasks";
-import { edit_input, todo_template } from "./view";
+import { editingInput, todoTemplate } from "./view";
 
 const tasks = new TaskList();
 let activeFilter = TASK_TYPES.ALL;
 
 // helper
 const getTaskDocumentElementById = (id) => {
-  const todo_list = document.getElementById("todo_list");
+  const todoList = document.getElementById("todos_list");
 
-  for (let child of todo_list.children) {
+  for (let child of todoList.children) {
     if (+child.dataset.id === +id) {
       return child;
     }
@@ -42,7 +42,8 @@ const taskOnDblClick = (event) => {
     redrawTask(task);
   };
 
-  const innerInput = edit_input(task.text, innerInputOnChange);
+  const innerInput = editingInput(task.text, innerInputOnChange);
+  innerInput.className = "input_state_editing";
 
   for (let child of taskElem.children) {
     child.classList.add("hide");
@@ -53,7 +54,7 @@ const taskOnDblClick = (event) => {
   innerInput.focus();
 };
 
-const todo_toggle_state = (event) => {
+const todoToggleState = (event) => {
   const todo = event.target.parentNode;
   const task = tasks.getTaskByID(+todo.dataset.id);
   task.toggleState();
@@ -69,15 +70,15 @@ const createTask = (event) => {
   input.value = "";
 
   const task = tasks.addTask(text);
-  const todo = todo_template(
+  const todo = todoTemplate(
     text,
     taskOnDblClick,
     deleteButtonOnClick,
     task.id,
-    todo_toggle_state
+    todoToggleState
   );
 
-  document.getElementById("todo_list").append(todo);
+  document.getElementById("todos_list").append(todo);
   update();
 };
 
@@ -89,15 +90,15 @@ const update = () => {
 };
 
 const redrawAllTasks = () => {
-  const todo_list = document.getElementById("todo_list");
+  const todo_list = document.getElementById("todos_list");
   todo_list.innerHTML = "";
   for (let task of tasks.getTasks()) {
-    const todoNode = todo_template(
+    const todoNode = todoTemplate(
       task.text,
       taskOnDblClick,
       deleteButtonOnClick,
       task.id,
-      todo_toggle_state,
+      todoToggleState,
       task.state
     );
     if (activeFilter !== TASK_TYPES.ALL && task.state !== activeFilter) {
@@ -109,12 +110,12 @@ const redrawAllTasks = () => {
 
 const redrawTask = (task) => {
   const todoNode = getTaskDocumentElementById(task.id);
-  const todoToReplace = todo_template(
+  const todoToReplace = todoTemplate(
     task.text,
     taskOnDblClick,
     deleteButtonOnClick,
     task.id,
-    todo_toggle_state,
+    todoToggleState,
     task.state
   );
   if (activeFilter !== TASK_TYPES.ALL && task.state !== activeFilter) {
@@ -132,7 +133,7 @@ const updateCounter = () => {
 };
 
 const updateFooterVisibility = () => {
-  const footer = document.getElementById("todo_footer");
+  const footer = document.getElementById("todos_footer");
   if (tasks.getLength() === 0) {
     footer.classList.add("hide");
   } else {
@@ -156,7 +157,7 @@ const updateToggleCompleteButtonState = () => {
 };
 
 const updateClearCompletedVisibility = () => {
-  const clearCompletedButton = document.getElementById("clear-completed");
+  const clearCompletedButton = document.getElementById("clearCompleted");
   if (tasks.getLength() !== tasks.getActiveTasksAmount()) {
     clearCompletedButton.classList.remove("hide");
   } else {
@@ -186,18 +187,22 @@ const clearCompleted = (event) => {
 };
 
 const clearFilterButtonsSelection = () => {
-  const buttons = document.getElementById("todo_filters").children;
+  const buttons = document.getElementById("todos_filters").children;
   for (const item of buttons) {
-    item.classList.remove("button-selected");
+    item.classList.remove("link_state_selected");
   }
+};
+
+const addFilterSelectionStyle = (element) => {
+  element.classList.add("link_state_selected");
 };
 
 const showAll = (event) => {
   activeFilter = TASK_TYPES.ALL;
   clearFilterButtonsSelection();
-  document.getElementById("filterAll").classList.add("button-selected");
+  addFilterSelectionStyle(document.getElementById("filterAll"));
 
-  const taskNodes = document.getElementById("todo_list");
+  const taskNodes = document.getElementById("todos_list");
   for (const item of taskNodes.children) {
     item.classList.remove("hide");
   }
@@ -206,9 +211,9 @@ const showAll = (event) => {
 const showActive = (event) => {
   activeFilter = TASK_TYPES.ACTIVE;
   clearFilterButtonsSelection();
-  document.getElementById("filterActive").classList.add("button-selected");
+  addFilterSelectionStyle(document.getElementById("filterActive"));
 
-  const taskNodes = document.getElementById("todo_list");
+  const taskNodes = document.getElementById("todos_list");
   for (const node of taskNodes.children) {
     const task = tasks.getTaskByID(+node.dataset.id);
     if (task.state === TASK_TYPES.ACTIVE) node.classList.remove("hide");
@@ -219,9 +224,9 @@ const showActive = (event) => {
 const showCompleted = (event) => {
   activeFilter = TASK_TYPES.COMPLETED;
   clearFilterButtonsSelection();
-  document.getElementById("filterCompleted").classList.add("button-selected");
+  addFilterSelectionStyle(document.getElementById("filterCompleted"));
 
-  const taskNodes = document.getElementById("todo_list");
+  const taskNodes = document.getElementById("todos_list");
   for (const node of taskNodes.children) {
     const task = tasks.getTaskByID(+node.dataset.id);
     if (task.state === TASK_TYPES.COMPLETED) node.classList.remove("hide");
@@ -236,4 +241,5 @@ export {
   showAll,
   showActive,
   showCompleted,
+  update,
 };

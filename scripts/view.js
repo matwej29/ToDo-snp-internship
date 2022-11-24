@@ -1,15 +1,22 @@
 import { TASK_TYPES } from "./tasks";
 
-const todo_template = (text, taskOnDblClick, onClickDelete, id, toggleTaskState, taskState=TASK_TYPES.ACTIVE) => {
-  const todo = document.createElement("div");
+const todoTemplate = (
+  text,
+  taskOnDblClick,
+  onClickDelete,
+  id,
+  toggleTaskState,
+  taskState = TASK_TYPES.ACTIVE
+) => {
+  const todo = document.createElement("li");
   todo.className = "task";
   todo.addEventListener("dblclick", taskOnDblClick);
   todo.dataset.id = id;
 
-  const todo_toggle_state = document.createElement("input");
-  todo_toggle_state.type = "checkbox";
-  todo_toggle_state.dataset.id = id;
-  todo_toggle_state.addEventListener("click", toggleTaskState);
+  const todoToggleState = document.createElement("input");
+  todoToggleState.type = "checkbox";
+  todoToggleState.dataset.id = id;
+  todoToggleState.addEventListener("click", toggleTaskState);
 
   const todo_content = document.createElement("p");
   todo_content.className = "task__content";
@@ -21,24 +28,22 @@ const todo_template = (text, taskOnDblClick, onClickDelete, id, toggleTaskState,
   todo_delete_button.addEventListener("click", onClickDelete);
   todo_delete_button.dataset.id = id;
 
-
-
   if (taskState === TASK_TYPES.ACTIVE) {
     todo.classList.remove("task_state_completed");
-    todo_toggle_state.checked = false;
+    todoToggleState.checked = false;
   } else if (taskState === TASK_TYPES.COMPLETED) {
     todo.classList.add("task_state_completed");
-    todo_toggle_state.checked = true;
+    todoToggleState.checked = true;
   }
 
-  todo.append(todo_toggle_state, todo_content, todo_delete_button);
+  todo.append(todoToggleState, todo_content, todo_delete_button);
 
   return todo;
 };
 
 const todoInputTask = (toggleComplete, addItem) => {
   const new_task_container = document.createElement("div");
-  new_task_container.className = "todo__input";
+  new_task_container.className = "todos__input";
 
   const toggle_todo_state_button = document.createElement("button");
   toggle_todo_state_button.id = "toggleTasksState";
@@ -57,7 +62,7 @@ const todoInputTask = (toggleComplete, addItem) => {
   return new_task_container;
 };
 
-const edit_input = (value, onChange) => {
+const editingInput = (value, onChange) => {
   const input = document.createElement("input");
   input.className = "input";
   input.type = "text";
@@ -84,17 +89,6 @@ const footer_template = (
   filterCompletedOnClick,
   clearCompleted
 ) => {
-  const todo_footer = document.createElement("div");
-  todo_footer.className = "todo__footer hide";
-  todo_footer.id = "todo_footer";
-
-  const itemsLeft = document.createElement("p");
-  itemsLeft.id = "itemsLeft";
-  itemsLeft.textContent = "n left";
-
-  const todo__filters = document.createElement("div");
-  todo__filters.className = "todo__filters";
-  todo__filters.id = "todo_filters";
 
   const filterAll = createFilter("filterAll", "All", (selected = true));
   filterAll.addEventListener("click", filterAllOnClick);
@@ -105,18 +99,8 @@ const footer_template = (
   const filterCompleted = createFilter("filterCompleted", "Completed");
   filterCompleted.addEventListener("click", filterCompletedOnClick);
 
-  todo__filters.append(filterAll, filterActive, filterCompleted);
-
   const clearCompletedButton = document.createElement("a");
-  clearCompletedButton.textContent = "clear completed"
-  clearCompletedButton.href = "#";
-  clearCompletedButton.id = "clear-completed";
-  clearCompletedButton.className = "link clear-completed";
   clearCompletedButton.addEventListener("click", clearCompleted);
-
-  todo_footer.append(itemsLeft, todo__filters, clearCompletedButton);
-
-  return todo_footer;
 };
 
-export { todo_template, todoInputTask, edit_input, footer_template };
+export { todoTemplate, todoInputTask, editingInput, footer_template };

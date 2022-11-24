@@ -7,6 +7,9 @@
   justify-content: center;
   text-align: center;
   vertical-align: middle;
+  background-color: transparent;
+  appearance: none;
+  text-decoration: none;
 }
 
 

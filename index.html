@@ -6,14 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="main.css" />
     <title>ToDo</title>
-    <link type="image/png" rel="icon" href="./todo-icon.png">
+    <link type="image/png" rel="icon" href="./todo-icon.png" />
   </head>
   <body>
     <div class="main">
       <h1>todos</h1>
       <div class="todos" id="todos">
-        <div class="todo__list" id="todo_list">
-
+        <ul class="todos__list" id="todos_list"></ul>
+        <div class="todos__footer" id="todos_footer">
+          <p id="itemsLeft">n items left</p>
+          <div class="todos__filters" id="todos_filters">
+            <a href="#" id="filterAll" class="link todos__filter link_state_selected">All</a>
+            <a href="#" id="filterActive" class="link todos__filter">Active</a>
+            <a href="#" id="filterCompleted" class="link todos__filter">Completed</a>
+          </div>
+          <button id="clearCompleted" class="btn todos__clear-completed hide">
+            clear completed
+          </button>
         </div>
       </div>
     </div>
