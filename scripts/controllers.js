@@ -166,13 +166,12 @@ const updateClearCompletedVisibility = () => {
 };
 
 const toggleCompleteButton = (event) => {
-  const isButtonActive =
-    toggleTasksStateButton.classList.contains("button-primaty_active");
+  const isButtonActive = document.getElementById("toggleTasksState").classList.contains(
+    "button-primaty_active"
+  );
   tasks.toggleTasksState(
     isButtonActive ? TASK_TYPES.ACTIVE : TASK_TYPES.COMPLETED
   );
-
-  tasks.toggleTasksState(target_val);
 
   update();
   redrawAllTasks();
