@@ -144,9 +144,9 @@ const updateFooterVisibility = () => {
 const updateToggleCompleteButtonState = () => {
   const button = document.getElementById("toggleTasksState");
   if (tasks.getActiveTasksAmount() === 0) {
-    button.classList.add("btn-primary-active");
+    button.classList.add("button-primaty_active");
   } else {
-    button.classList.remove("btn-primary-active");
+    button.classList.remove("button-primaty_active");
   }
 
   if (tasks.getLength() === 0) {
@@ -167,7 +167,7 @@ const updateClearCompletedVisibility = () => {
 
 const toggleCompleteButton = (event) => {
   const isButtonActive =
-    toggleTasksStateButton.classList.contains("btn-primary-active");
+    toggleTasksStateButton.classList.contains("button-primaty_active");
   tasks.toggleTasksState(
     isButtonActive ? TASK_TYPES.ACTIVE : TASK_TYPES.COMPLETED
   );

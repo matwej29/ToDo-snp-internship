@@ -47,7 +47,7 @@ const todoInputTask = (toggleComplete, addItem) => {
 
   const toggle_todo_state_button = document.createElement("button");
   toggle_todo_state_button.id = "toggleTasksState";
-  toggle_todo_state_button.className = "btn btn-primary hide";
+  toggle_todo_state_button.className = "button button-primary hide";
   toggle_todo_state_button.textContent = "toggle state";
   toggle_todo_state_button.addEventListener("click", toggleComplete);
 

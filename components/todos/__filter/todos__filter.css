@@ -1,3 +1,11 @@
+.todos__filter {
+  border: 1px solid var(--gray300);
+  border-radius: 3px;
+  padding: 3px 7px;
+  width: auto;
+  box-sizing: content-box;
+}
+
 @media screen and (min-width: 1024px) {
   .todos__filter:hover {
     background-color: var(--gray200);
@@ -5,13 +13,7 @@
 }
 
 @media screen and (max-width: 1023px) {
-  .todos__filter{
+  .todos__filter {
     text-align: center;
   }
-}
-
-.todos__filter{
-  border: 1px solid var(--gray300);
-  border-radius: 3px;
-  padding: 3px 7px;
 }
