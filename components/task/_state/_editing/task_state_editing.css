@@ -2,21 +2,3 @@
   padding: 0 20px 0 20px;
   background-color: var(--orange200);
 }
-
-.task_state_editing input {
-  height: 100%;
-  width: 100%;
-  background-color: transparent;
-  border: none;
-  outline: none;
-}
-
-.task_state_editing input:hover {
-  background-color: transparent;
-  border: none;
-}
-
-.task_state_editing input:focus {
-  background-color: transparent;
-  border: none;
-}

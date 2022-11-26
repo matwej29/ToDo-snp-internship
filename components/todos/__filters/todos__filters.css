@@ -1,0 +1,12 @@
+.todos__filters {
+  display: grid;
+  grid-auto-flow: column;
+  gap: 5px;
+}
+
+@media screen and (max-width: 1023px) {
+  .todos__filters {
+    flex-direction: column;
+    grid-auto-flow: row;
+  }
+}

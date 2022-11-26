@@ -1,0 +1,19 @@
+.input {
+  background: var(--beige100);
+  border: 1px solid var(--beige200);
+  border-radius: 10px;
+  height: 34px;
+  width: 100%;
+  padding: 0 20px 0 20px;
+  box-sizing: border-box;
+  appearance: none;
+}
+
+.input:hover {
+  background: var(--beige200);
+}
+
+.input:focus {
+  border: 1px solid var(--gray300);
+  outline: 0;
+}
